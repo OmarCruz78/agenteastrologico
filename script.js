@@ -63,3 +63,4 @@ document.getElementById('generar').addEventListener('click', async () => {
 
   const interpretacion = await generarInterpretacion(fechaHoraISO, lugar);
   resultadoDiv.textContent = interpretacion;
+});
