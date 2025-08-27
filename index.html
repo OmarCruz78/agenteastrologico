@@ -1,134 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agente Astrológico IA</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #4a7c59;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    main {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    label {
-      display: block;
-      margin: 1rem 0 0.5rem;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background: #4a7c59;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    button:hover {
-      background: #3b6045;
-    }
-
-    #resultado {
-      margin-top: 2rem;
-      white-space: pre-line;
-      background: #f7f9fa;
-      padding: 1rem;
-      border-radius: 5px;
-      min-height: 100px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agente Astrológico IA</title>
+<style>
+  body { font-family: Arial; background:#f0f4f8; margin:0; padding:0;}
+  header{background:#4a7c59;color:white;padding:1rem;text-align:center;}
+  main{max-width:600px;margin:2rem auto;background:white;padding:2rem;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+  label{display:block;margin:1rem 0 0.5rem;}
+  input{width:100%;padding:0.5rem;border-radius:5px;border:1px solid #ccc;}
+  button{margin-top:1rem;padding:0.75rem;background:#4a7c59;color:white;border:none;border-radius:5px;cursor:pointer;width:100%;font-size:1rem;}
+  button:hover{background:#3b6045;}
+  #resultado{margin-top:2rem;white-space:pre-line;background:#f7f9fa;padding:1rem;border-radius:5px;min-height:100px;}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Agente Astrológico IA</h1>
-  </header>
+<header><h1>Agente Astrológico IA</h1></header>
+<main>
+<label for="fecha">Fecha de nacimiento:</label>
+<input type="date" id="fecha">
 
-  <main>
-    <label for="fecha">Fecha de nacimiento:</label>
-    <input type="date" id="fecha">
+<label for="hora">Hora de nacimiento:</label>
+<input type="time" id="hora">
 
-    <label for="hora">Hora de nacimiento:</label>
-    <input type="time" id="hora">
+<label for="lugar">Lugar de nacimiento:</label>
+<input type="text" id="lugar" placeholder="Ciudad, País">
 
-    <label for="lugar">Lugar de nacimiento:</label>
-    <input type="text" id="lugar" placeholder="Ciudad, País">
+<button id="generar">Generar interpretación</button>
 
-    <button id="generar">Generar interpretación</button>
+<div id="resultado">Aquí aparecerá la interpretación...</div>
+</main>
 
-    <div id="resultado">Aquí aparecerá la interpretación...</div>
-  </main>
+<script type="module">
+import OpenAI from 'https://cdn.jsdelivr.net/npm/openai@latest/dist/openai.min.js';
+import jyotish from 'https://cdn.jsdelivr.net/npm/jyotish-calculations@latest/dist/jyotish.min.js';
 
-  <script type="module">
-    import OpenAI from "https://cdn.jsdelivr.net/npm/openai@latest/dist/openai.min.js";
+// Inicializar OpenAI
+const openai = new OpenAI({
+  apiKey: 'TU_API_KEY_AQUI', // Mejor usar backend para seguridad
+});
 
-    const openai = new OpenAI({
-      apiKey: "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 "  // Reemplaza con tu API Key
+// Función para generar la interpretación astrológica
+async function generarInterpretacion(fechaHoraISO, lugar) {
+  try {
+    const fecha = new Date(fechaHoraISO);
+
+    // Calcular posiciones planetarias
+    const posiciones = jyotish.grahas.calculatePositions(fecha, lugar);
+
+    // Obtener Nakshatra de la Luna
+    const nakshatraLuna = jyotish.nakshatras.getNakshatraForPosition(posiciones.moon.longitude);
+
+    // Crear prompt para GPT
+    const prompt = `
+Eres un astrólogo experto en Jyotish.
+Interpreta la siguiente carta natal:
+Fecha y hora: ${fecha.toLocaleString()}
+Lugar: ${lugar}
+Posiciones planetarias: ${JSON.stringify(posiciones, null, 2)}
+Nakshatra de la Luna: ${nakshatraLuna}
+
+Proporciona un análisis detallado sobre personalidad, emociones, liderazgo, talentos y posibles desafíos.
+Hazlo claro y amigable.
+`;
+
+    // Llamada a OpenAI
+    const respuesta = await openai.chat.completions.create({
+      model: 'gpt-5-mini',
+      messages: [{ role: 'user', content: prompt }],
     });
 
-    document.getElementById("generar").addEventListener("click", async () => {
-      const fecha = document.getElementById("fecha").value;
-      const hora = document.getElementById("hora").value;
-      const lugar = document.getElementById("lugar").value;
+    return respuesta.choices[0].message.content;
+  } catch (error) {
+    console.error(error);
+    return 'Error al generar la interpretación. Revisa la consola.';
+  }
+}
 
-      if (!fecha || !hora || !lugar) {
-        alert("Por favor, completa todos los campos.");
-        return;
-      }
+// Evento del botón
+document.getElementById('generar').addEventListener('click', async () => {
+  const fecha = document.getElementById('fecha').value;
+  const hora = document.getElementById('hora').value;
+  const lugar = document.getElementById('lugar').value;
+  console.log("Hello, world!");
 
-      const prompt = `
-      Eres un astrólogo experto. 
-      Interpreta la carta natal de una persona con la siguiente información:
-      Fecha de nacimiento: ${fecha}
-      Hora de nacimiento: ${hora}
-      Lugar de nacimiento: ${lugar}
+  if (!fecha || !hora || !lugar) {
+    alert('Por favor, completa todos los campos.');
+    return;
+  }
 
-      Proporciona un análisis detallado sobre personalidad, liderazgo, emociones y talentos.
-      Hazlo claro y amigable.
-      `;
+  // Combinar fecha y hora en formato ISO
+  const fechaHoraISO = `${fecha}T${hora}:00`;
 
-      const resultadoDiv = document.getElementById("resultado");
-      resultadoDiv.textContent = "Generando interpretación...";
+  const resultadoDiv = document.getElementById('resultado');
+  resultadoDiv.textContent = 'Generando interpretación...';
 
-      try {
-        const respuesta = await openai.chat.completions.create({
-          model: "gpt-5-mini",
-          messages: [{ role: "user", content: prompt }]
-        });
-
-        resultadoDiv.textContent = respuesta.choices[0].message.content;
-      } catch (error) {
-        console.error(error);
-        resultadoDiv.textContent = "Error al generar la interpretación. Revisa la consola.";
-      }
-    });
-  </script>
+  const interpretacion = await generarInterpretacion(fechaHoraISO, lugar);
+  resultadoDiv.textContent = interpretacion;
+});
+</script>
 </body>
 </html>
+
