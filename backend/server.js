@@ -8,6 +8,12 @@ app.get("/ping", (req, res) => {
   res.json({ message: "pong 🏓", status: "ok" });
 });
 
+//app get
+app.get("/", (req, res) => {
+  res.send("🚀 Servidor funcionando en Render");
+});
+
+
 // Iniciar servidor
 app.listen(port, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${port}`);
@@ -20,3 +26,4 @@ app.get("/api/horoscope", (req, res) => {
     date: new Date().toLocaleDateString()
     });
 });
+
