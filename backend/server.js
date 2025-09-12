@@ -19,6 +19,12 @@ app.listen(port, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${port}`);
 });
 
+
+app.get("/api/status", (req, res) => {
+  res.json({ status: "ok", time: new Date() });
+});
+
+
 app.get("/api/horoscope", (req, res) => {
   res.json({
     sign: "Aries",
