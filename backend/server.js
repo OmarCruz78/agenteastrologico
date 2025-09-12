@@ -13,15 +13,15 @@ app.get("/", (req, res) => {
   res.send("🚀 Servidor funcionando en Render");
 });
 
+app.get("/api/status", (req, res) => {
+  res.json({ status: "ok", time: new Date() });
+});
+
+
 
 // Iniciar servidor
 app.listen(port, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${port}`);
-});
-
-
-app.get("/api/status", (req, res) => {
-  res.json({ status: "ok", time: new Date() });
 });
 
 
