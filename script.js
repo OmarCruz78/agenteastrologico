@@ -65,6 +65,3 @@ document.getElementById('generar').addEventListener('click', async () => {
   resultadoDiv.textContent = interpretacion;
 });
 
-function loadImage() {
-  alert("Image is loaded");
-}
