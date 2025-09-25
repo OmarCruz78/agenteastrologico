@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 // Ruta del blog
-app.get("/blog", (req, res) => {
+app.get("/blogpost", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "blog.html"));
 });
 
