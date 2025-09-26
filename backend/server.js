@@ -1,35 +1,41 @@
-
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
+const express = require("express");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Necesario para rutas absolutas
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Carpeta pública (estática)
+const publicDir = path.join(__dirname, "public");
+app.use(express.static(publicDir));
 
-// Carpeta pública (donde estará el blog.html)
-app.use(express.static(path.join(__dirname, "public")));
-
-// Ruta de inicio (tu landing)
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Endpoint de prueba
+app.get("/ping", (req, res) => {
+  res.json({ message: "pong 🏓", status: "ok" });
 });
 
-// Ruta del blog
+// API ejemplo
+app.get("/api/status", (req, res) => {
+  res.json({ status: "ok", time: new Date() });
+});
+
+app.get("/api/horoscope", (req, res) => {
+  res.json({
+    sign: "Aries",
+    prediction: "Hoy es un buen día para empezar algo nuevo 🔮",
+    date: new Date().toLocaleDateString(),
+  });
+});
+
+// Rutas HTML
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicDir, "index.html"));
+});
+
 app.get("/blogpost", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "blogpost.html"));
+  res.sendFile(path.join(publicDir, "blogpost.html"));
 });
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
 });
-
-
-
-
-
-
