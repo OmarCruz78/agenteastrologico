@@ -1,2 +1,74 @@
-..
-
+[
+  {
+    "id": "aries",
+    "title": "Aries en Jyotish: el pionero del zodiaco",
+    "excerpt": "Aries (Mesha Rashi) es fuego cardinal regido por Marte: coraje, inicio y acción.",
+    "content": "<h2>🌟 La esencia de Aries</h2><p>Aries encarna el espíritu del guerrero y del pionero. Impulso, dinamismo y la necesidad de iniciar.</p><h3>🧠 Rasgos principales</h3><ul><li>Iniciativa y valentía</li><li>Impaciencia y energía física</li></ul><h3>⚖️ Fortalezas</h3><p>Liderazgo, valentía para empezar nuevos proyectos.</p><h3>⚠️ Desafíos</h3><p>Impulsividad y dificultad para sostener a largo plazo.</p><h3>🌌 Camino zodiacal</h3><p>Marca el inicio del ciclo: el 'Yo soy' encarnado con fuerza.</p><h3>🔮 Reflexión final</h3><p>Aries nos enseña a empezar con convicción; su desafío es sostener con conciencia.</p>"
+  },
+  {
+    "id": "tauro",
+    "title": "Tauro en Jyotish: el constructor estable",
+    "excerpt": "Tauro (Vrishabha Rashi), signo de tierra fijo regido por Venus: estabilidad y sensorialidad.",
+    "content": "<h2>🌟 La esencia de Tauro</h2><p>Tauro valora la constante y la seguridad material, busca construir y disfrutar los frutos de la vida.</p><h3>🧠 Rasgos principales</h3><ul><li>Constancia</li><li>Sensualidad</li></ul><h3>⚖️ Fortalezas</h3><p>Paciencia, sentido práctico y gusto por la belleza.</p><h3>⚠️ Desafíos</h3><p>Resistencia al cambio y apego.</p><h3>🌌 Camino zodiacal</h3><p>Refina lo que Aries inicia: transforma impulso en estructura.</p><h3>🔮 Reflexión final</h3><p>La lección de Tauro es disfrutar lo construido sin aferrarse.</p>"
+  },
+  {
+    "id": "geminis",
+    "title": "Géminis en Jyotish: el mensajero curioso",
+    "excerpt": "Géminis (Mithuna Rashi) regido por Mercurio: mente, comunicación y adaptabilidad.",
+    "content": "<h2>🌟 La esencia de Géminis</h2><p>Géminis mueve información; su cualidad es la curiosidad y la versatilidad mental.</p><h3>🧠 Rasgos principales</h3><ul><li>Agilidad mental</li><li>Habilidad comunicativa</li></ul><h3>⚖️ Fortalezas</h3><p>Adaptabilidad y facilidad para aprender.</p><h3>⚠️ Desafíos</h3><p>Superficialidad y dispersión.</p><h3>🌌 Camino zodiacal</h3><p>Amplía el contacto social tras la estabilidad de Tauro: información y movimiento.</p><h3>🔮 Reflexión final</h3><p>Conecta la curiosidad con la profundización para transformar datos en sabiduría.</p>"
+  },
+  {
+    "id": "cancer",
+    "title": "Cáncer en Jyotish: el cuidador emocional",
+    "excerpt": "Cáncer (Karka Rashi) regido por la Luna: hogar, raíces y sensibilidad emocional.",
+    "content": "<h2>🌟 La esencia de Cáncer</h2><p>Cáncer protege lo emocional y el vínculo: la piel sensible del zodiaco.</p><h3>🧠 Rasgos principales</h3><ul><li>Empatía</li><li>Fuerte conexión con la memoria</li></ul><h3>⚖️ Fortalezas</h3><p>Nutrir, proteger y sostener la intimidad.</p><h3>⚠️ Desafíos</h3><p>Hipersensibilidad, ánimo cambiante.</p><h3>🌌 Camino zodiacal</h3><p>Tras Géminis aparece la interioridad: la familia y la base emocional.</p><h3>🔮 Reflexión final</h3><p>Cuidar la propia casa interior permite cuidar al mundo.</p>"
+  },
+  {
+    "id": "leo",
+    "title": "Leo en Jyotish: el corazón que brilla",
+    "excerpt": "Leo (Simha Rashi), regido por el Sol: creatividad, honor y liderazgo del corazón.",
+    "content": "<h2>🌟 La esencia de Leo</h2><p>Leo expresa el brillo del corazón: creatividad y el deseo de ser reconocido.</p><h3>🧠 Rasgos principales</h3><ul><li>Generosidad</li><li>Necesidad de expresar el yo</li></ul><h3>⚖️ Fortalezas</h3><p>Carisma y capacidad creativa para liderar causas.</p><h3>⚠️ Desafíos</h3><p>Orgullo excesivo y necesidad de validación.</p><h3>🌌 Camino zodiacal</h3><p>Tras Cáncer, Leo anima a mostrar el arte del ser al mundo.</p><h3>🔮 Reflexión final</h3><p>Brilla desde la autenticidad y comparte tu luz con humildad.</p>"
+  },
+  {
+    "id": "virgo",
+    "title": "Virgo en Jyotish: el buscador de la perfección",
+    "excerpt": "Virgo (Kanya Rashi), signo de tierra mutable regido por Mercurio: servicio, detalle y mejora continua.",
+    "content": "<h2>🌟 La esencia de Virgo</h2><p>Virgo encarna la mente práctica y analítica. Su mirada penetra en los detalles más sutiles, distinguiendo lo útil de lo superfluo.</p><h3>🧠 Rasgos principales</h3><ul><li>Intelecto crítico</li><li>Vocación de servicio</li></ul><h3>⚖️ Fortalezas</h3><p>Organización, sensibilidad terapéutica y ética laboral.</p><h3>⚠️ Desafíos</h3><p>Perfeccionismo, autocrítica y dificultad para disfrutar el presente.</p><h3>🌌 Camino zodiacal</h3><p>Después de Leo, Virgo purifica y ordena lo creado para el encuentro social en Libra.</p><h3>🔮 Reflexión final</h3><p>La perfección es un camino; cuando se equilibra con compasión, Virgo sana y sirve.</p>"
+  },
+  {
+    "id": "libra",
+    "title": "Libra en Jyotish: el diplomático del equilibrio",
+    "excerpt": "Libra (Tula Rashi), regido por Venus: armonía, relaciones y sentido estético.",
+    "content": "<h2>🌟 La esencia de Libra</h2><p>Libra busca la armonía en las relaciones y la justicia en el encuentro con otros.</p><h3>🧠 Rasgos principales</h3><ul><li>Diplomacia</li><li>Amor por la belleza</li></ul><h3>⚖️ Fortalezas</h3><p>Capacidad de mediación y sentido del equilibrio social.</p><h3>⚠️ Desafíos</h3><p>Indecisión y dependencia de la aprobación externa.</p><h3>🌌 Camino zodiacal</h3><p>Libra integra la vida personal con la colectiva a través del diálogo y el equilibrio.</p><h3>🔮 Reflexión final</h3><p>Busca la armonía en ti y en tus relaciones; el equilibrio primero es interno.</p>"
+  },
+  {
+    "id": "escorpio",
+    "title": "Escorpio en Jyotish: el transformador profundo",
+    "excerpt": "Escorpio (Vrishchika Rashi), regido por Marte / Ketu en Jyotish: poder interior, transformación y profundidad emocional.",
+    "content": "<h2>🌟 La esencia de Escorpio</h2><p>Escorpio habita lo profundo: muerte simbólica, renacimiento y fuerza psíquica.</p><h3>🧠 Rasgos principales</h3><ul><li>Intensidad emocional</li><li>Capacidad de regeneración</li></ul><h3>⚖️ Fortalezas</h3><p>Poder de transformación y compromiso profundo.</p><h3>⚠️ Desafíos</h3><p>Celos, control y tendencia a la autodestrucción si no se integra.</p><h3>🌌 Camino zodiacal</h3><p>Profundiza la relación con lo inconsciente y permite renacimientos conscientes.</p><h3>🔮 Reflexión final</h3><p>La sombra de Escorpio es puerta de transformación cuando se acepta.</p>"
+  },
+  {
+    "id": "sagitario",
+    "title": "Sagitario en Jyotish: el buscador de sentido",
+    "excerpt": "Sagitario (Dhanu Rashi), regido por Júpiter: expansión, filosofía y aventura interior.",
+    "content": "<h2>🌟 La esencia de Sagitario</h2><p>Sagitario busca ampliar la visión: viajes, ideas y búsqueda de propósito.</p><h3>🧠 Rasgos principales</h3><ul><li>Optimismo</li><li>Búsqueda filosófica</li></ul><h3>⚖️ Fortalezas</h3><p>Visión amplia y entusiasmo por aprender.</p><h3>⚠️ Desafíos</h3><p>Exceso, falta de detalle y dogmatismo.</p><h3>🌌 Camino zodiacal</h3><p>Tras Escorpio, Sagitario eleva el aprendizaje hacia sentido y expansión.</p><h3>🔮 Reflexión final</h3><p>La sabiduría de Sagitario es disfrutar el viaje con humildad y curiosidad.</p>"
+  },
+  {
+    "id": "capricornio",
+    "title": "Capricornio en Jyotish: el constructor del legado",
+    "excerpt": "Capricornio (Makara Rashi), regido por Saturno: disciplina, estructura y ambición responsable.",
+    "content": "<h2>🌟 La esencia de Capricornio</h2><p>Capricornio materializa objetivos con paciencia y planificación a largo plazo.</p><h3>🧠 Rasgos principales</h3><ul><li>Disciplina</li><li>Sentido de responsabilidad</li></ul><h3>⚖️ Fortalezas</h3><p>Perseverancia y habilidad para construir estructuras duraderas.</p><h3>⚠️ Desafíos</h3><p>Rigidez, exceso de trabajo y miedo al fracaso.</p><h3>🌌 Camino zodiacal</h3><p>Capricornio madura la ambición para dejar un legado estable.</p><h3>🔮 Reflexión final</h3><p>El desafío es alcanzar metas sin perder la humanidad del camino.</p>"
+  },
+  {
+    "id": "acuario",
+    "title": "Acuario en Jyotish: el visionario colectivo",
+    "excerpt": "Acuario (Kumbha Rashi), regido por Saturno/Rahu en Jyotish: innovación, comunidad y visión global.",
+    "content": "<h2>🌟 La esencia de Acuario</h2><p>Acuario piensa en el futuro: ideas radicales, fraternidad y lo colectivo por encima de lo individual.</p><h3>🧠 Rasgos principales</h3><ul><li>Originalidad</li><li>Humanitarismo</li></ul><h3>⚖️ Fortalezas</h3><p>Innovación y capacidad para organizar grupos con fines elevados.</p><h3>⚠️ Desafíos</h3><p>Desapego afectivo y rebeldía sin dirección.</p><h3>🌌 Camino zodiacal</h3><p>Acuario impulsa la transformación social y tecnológica para el bien común.</p><h3>🔮 Reflexión final</h3><p>Conecta tu idea con comunidad para que la visión cobre realidad.</p>"
+  },
+  {
+    "id": "piscis",
+    "title": "Piscis en Jyotish: el puente hacia lo trascendente",
+    "excerpt": "Piscis (Meena Rashi), regido por Júpiter/Neptuno: intuición, compasión y conexión con lo sutil.",
+    "content": "<h2>🌟 La esencia de Piscis</h2><p>Piscis une lo finito con lo infinito: sensibilidad, sueño y devoción.</p><h3>🧠 Rasgos principales</h3><ul><li>Empatía</li><li>Imaginación</li></ul><h3>⚖️ Fortalezas</h3><p>Conexión con lo espiritual y capacidad sanadora.</p><h3>⚠️ Desafíos</h3><p>Evasión y confusión si no hay límites claros.</p><h3>🌌 Camino zodiacal</h3><p>Piscis cierra el ciclo integrando todo lo aprendido en una visión compasiva.</p><h3>🔮 Reflexión final</h3><p>La puerta de Piscis es la entrega consciente: arte, servicio y devoción.</p>"
+  }
+]
