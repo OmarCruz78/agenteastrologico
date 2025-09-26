@@ -159,32 +159,87 @@ app.get("/blog/:id", (req, res) => {
   if (!post) {
     return res.status(404).send("<h2>Post no encontrado</h2><p><a href='/blog'>Volver al blog</a></p>");
   }
+// dentro de app.get('/blog/:id', ...)
+const html = `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${post.title} — Agente Astrológico</title>
+  <meta name="description" content="${post.excerpt || ''}">
+  <link rel="stylesheet" href="/styles-post.css">
+</head>
+<body>
+  <div class="page">
+    <header class="post-header">
+      <div class="brand-compact">
+        <div class="logo">A</div>
+        <div>
+          <div style="font-weight:800">${post.author || 'Agente Astrológico'}</div>
+          <div class="post-meta">${new Date(post.date).toLocaleDateString()} • ${post.readingMinutes || ''} min</div>
+        </div>
+      </div>
+      <div style="margin-left:auto">
+        <a href="/blog" class="tag-pill" style="text-decoration:none">← Volver al blog</a>
+      </div>
+    </header>
 
-  const html = `
-  <!doctype html>
-  <html lang="es">
-  <head>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>${post.title} — Agente Astrológico</title>
-    <style>
-      body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fff;color:#111;padding:20px}
-      .container{max-width:900px;margin:0 auto}
-      header{margin-bottom:12px}
-      .meta{color:#6b7280;margin-bottom:18px}
-      article p{line-height:1.7}
-      a{color:#0b6b3a}
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <header><a href="/blog">⬅ Volver</a><h1>${post.title}</h1></header>
-      <div class="meta">Publicado • Agente Astrológico</div>
-      <article>${post.content}</article>
-      <footer style="margin-top:40px;color:#666">© ${new Date().getFullYear()} Agente Astrológico</footer>
+    <div class="post-card">
+      <div class="article-col">
+        <div class="post-cover" style="background-image:url('${post.coverImage || '/images/default-cover.jpg'}')"></div>
+
+        <div class="row-meta">
+          ${(post.tags||[]).map(t=>`<span class="tag-pill">${t}</span>`).join(' ')}
+        </div>
+
+        <article class="article-body">
+          <h1>${post.title}</h1>
+          <div class="article-content">
+            ${post.content}
+          </div>
+          <div class="post-cta">
+            <button class="btn" onclick="window.location.href='/contacto'">Pedir lectura</button>
+            <button class="ghost" id="copyUrlBtn">Copiar URL</button>
+          </div>
+        </article>
+      </div>
+
+      <aside class="aside">
+        <div class="card">
+          <div style="font-weight:800">Sobre este tránsito</div>
+          <p class="box" style="margin-top:10px">${post.excerpt}</p>
+
+          <div class="toc">
+            <!-- TOC generado desde el contenido (opcional) -->
+            <div style="font-weight:700;margin-top:10px">Contenido</div>
+            <a href="#fechas">Fechas clave</a>
+            <a href="#esencia">Esencia</a>
+            <a href="#fortalezas">Fortalezas</a>
+            <a href="#aprovechar">Cómo aprovecharlo</a>
+          </div>
+
+          <div style="margin-top:12px">
+            <div style="font-weight:700">Compartir</div>
+            <div class="share-btn">
+              <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank')">Facebook</button>
+              <button onclick="window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title+' '+location.href),'_blank')">Twitter</button>
+              <button onclick="window.open('mailto:?subject='+encodeURIComponent(document.title)+'&body='+encodeURIComponent(location.href))">Email</button>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
-  </body>
-  </html>
-  `;
+
+    <footer style="margin-top:18px;color:var(--muted);display:flex;justify-content:space-between">
+      <div>© ${new Date().getFullYear()} Agente Astrológico</div>
+      <div style="color:var(--muted)">¿Quieres una lectura personalizada? <a href="/contacto" style="color:var(--accent)">Pide una sesión</a></div>
+    </footer>
+  </div>
+
+  <script src="/post.js"></script>
+</body>
+</html>`;
+
   res.send(html);
 });
 
