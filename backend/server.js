@@ -113,7 +113,190 @@ app.get("/blog", (req, res) => {
     <link rel="stylesheet" href="/styles-blog.css">
     <style>
 
+/* 🎨 Variables de color */
+:root {
+  --bg: #fafafa;
+  --text: #222;
+  --muted: #666;
+  --accent: #5b5fc7;
+  --card-bg: #fff;
+  --border: #e5e5e5;
+  --radius: 12px;
+  --shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --max-width: 960px;
+  --font: "Inter", system-ui, sans-serif;
+}
 
+/* 🔤 Reset mínimo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+/* 📰 Encabezado */
+.blog-header {
+  background: var(--accent);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.blog-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.blog-header .lead {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* 📦 Contenedor */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* 🔍 Filtros */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+#searchInput {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  width: 100%;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  background: var(--border);
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tag:hover {
+  background: #dcdcdc;
+}
+.tag.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* 📚 Grid de posts */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* 🎴 Card */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card-link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card-media {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+.card-body {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card-body h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.excerpt {
+  flex: 1;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+.card-tags {
+  margin-top: auto;
+}
+.pill {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-right: 0.3rem;
+}
+
+/* 📑 Paginación */
+.pagination {
+  margin: 2rem 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.pagination button {
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--border);
+  transition: background 0.2s;
+}
+.pagination button:hover {
+  background: #dcdcdc;
+}
+.pagination button.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* 📌 Footer */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
 
 
     </style>
