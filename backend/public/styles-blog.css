@@ -182,3 +182,133 @@ body {
   border-top: 1px solid var(--border);
   margin-top: 3rem;
 }
+
+/* styles-post.css — diseño para páginas individuales de post */
+
+/* ===== Variables / tema ===== */
+:root{
+  --bg: #0f1724;
+  --panel: #071124;
+  --muted: #9aa8b6;
+  --text: #e6eef8;
+  --accent: #7ed957;
+  --accent-2: #4fc1ff;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  --glass: rgba(255,255,255,0.03);
+  --radius: 12px;
+  --container: 1100px;
+  --max-content: 820px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Reset mínimo ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg,var(--bg) 0%, #071124 100%);
+  color:var(--text);
+  line-height:1.65;
+  font-size:16px;
+}
+
+/* ===== Page container ===== */
+.page{
+  max-width:var(--container);
+  margin:28px auto;
+  padding:20px;
+}
+
+/* ===== Header compacto ===== */
+.post-header{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  margin-bottom:18px;
+}
+.brand-compact{display:flex;gap:14px;align-items:center}
+.logo{
+  width:56px;height:56px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#072018;font-size:18px;
+  box-shadow:0 8px 28px rgba(2,6,23,0.6);
+  flex:0 0 56px;
+}
+.post-meta{color:var(--muted);font-size:0.95rem;margin-top:4px}
+
+/* ===== Card principal (contenido + aside) ===== */
+.post-card{
+  background: var(--card-bg);
+  border-radius:var(--radius);
+  padding:22px;
+  box-shadow:0 12px 40px rgba(2,6,23,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:26px;
+  align-items:start;
+}
+
+/* ===== Columna principal ===== */
+.article-col{max-width:var(--max-content)}
+.post-cover{
+  width:100%;
+  height:360px;
+  border-radius:10px;
+  background-size:cover;
+  background-position:center;
+  margin-bottom:14px;
+  box-shadow: inset 0 -24px 80px rgba(0,0,0,0.35);
+  overflow:hidden;
+}
+
+/* tags / meta row */
+.row-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.tag-pill{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.03);
+  padding:6px 10px;border-radius:999px;font-weight:600;color:var(--muted);font-size:.85rem;
+}
+
+/* article content */
+article h1{margin:0 0 12px;font-size:clamp(1.5rem,2.6vw,2.2rem)}
+.article-content p{color:var(--text);margin:0 0 12px}
+.article-content h2{color:var(--accent);margin-top:18px}
+.article-content h3{margin-top:14px}
+.article-content ul{color:#cfe8d0;margin-left:1rem;margin-bottom:12px}
+
+/* CTA row */
+.post-cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{background:var(--accent);color:#072018;padding:.62rem .9rem;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:.56rem .85rem;border-radius:10px}
+
+/* ===== Aside / tarjeta lateral ===== */
+.aside .card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);
+}
+.box{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);margin-top:10px;color:var(--muted)}
+.toc{margin-top:12px;font-size:.95rem;color:var(--muted)}
+.toc a{display:block;color:var(--muted);text-decoration:none;margin:6px 0}
+.share-btn{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.share-btn button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--text);cursor:pointer}
+
+/* ===== Small screens ===== */
+@media (max-width:980px){
+  .post-card{grid-template-columns:1fr}
+  .post-cover{height:240px}
+  .aside{order:2}
+}
+@media (max-width:520px){
+  .page{padding:12px}
+  .post-cover{height:160px}
+  .logo{width:48px;height:48px;font-size:16px}
+  .post-meta{font-size:.85rem}
+}
+
+/* ===== Accessibility / small improvements ===== */
+a{color:inherit}
+button{font-family:inherit}
+
