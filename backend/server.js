@@ -422,7 +422,7 @@ app.get("/blog/:id", (req, res) => {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>${escapeHtml(post.title)} — Agente Astrológico</title>
   <meta name="description" content="${escapeHtml(post.excerpt || '')}">
-  <link rel="stylesheet" href="/styles-post.css">
+  <link rel="stylesheet" href="/styles-blog.css">
 </head>
 <body>
   <div class="page">
