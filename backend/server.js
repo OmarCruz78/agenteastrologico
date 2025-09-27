@@ -8,7 +8,10 @@ const PORT = process.env.PORT || 3000;
 
 // public dentro de backend/
 const publicDir = path.join(__dirname, "public");
+
+console.log("Servir estáticos desde:", publicDir);
 app.use(express.static(publicDir));
+
 
 // Helper: detecta la ubicación del posts.json (intenta dos caminos comunes)
 function resolvePostsPath() {
