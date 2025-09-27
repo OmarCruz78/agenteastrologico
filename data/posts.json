@@ -1,50 +1,14 @@
 [
-    {
-  "id": "virgo-cuerpo",
-  "titulo": "Virgo en Jyotish: intestinos y sistema nervioso",
-  "descripcion": "En la astrología védica, Virgo (Kanyā Rāśi) se relaciona con la digestión, los intestinos y el sistema nervioso, reflejando su naturaleza analítica y discriminativa.",
-  "contenido": {
-    "cuerpo": {
-      "partes": [
-        "Intestinos",
-        "Abdomen inferior",
-        "Bazo",
-        "Sistema digestivo"
-      ],
-      "funciones": [
-        "Asimilación de nutrientes",
-        "Separación de lo útil y lo inútil",
-        "Procesos de purificación corporal"
-      ]
-    },
-    "sistema_nervioso": {
-      "regente": "Mercurio (Budha)",
-      "asociaciones": [
-        "Comunicación interna del cuerpo",
-        "Impulsos nerviosos",
-        "Coordinación motriz",
-        "Ansiedad o hipersensibilidad nerviosa si está afligido"
-      ]
-    },
-    "referencias": [
-      "Bṛhat Parāśara Horā Śāstra: Virgo gobierna el abdomen, desde el ombligo hasta la cintura.",
-      "Sarvārtha Cintāmaṇi: Mercurio rige los nervios, la piel y la coordinación.",
-      "Āyurveda: Virgo se vincula con Pitta-Vata, especialmente en digestión y nervios."
-    ],
-    "equilibrio": {
-      "fortalezas": [
-        "Capacidad de análisis y discriminación",
-        "Cuidado del cuerpo a través de la dieta",
-        "Sensibilidad hacia terapias de sanación"
-      ],
-      "desafios": [
-        "Problemas digestivos crónicos",
-        "Tendencia a la ansiedad o nerviosismo",
-        "Hipocondría o exceso de autocrítica"
-      ]
-    },
-    "reflexion": "Virgo nos recuerda que la verdadera salud surge cuando equilibramos la digestión del cuerpo y la calma de la mente. Al cuidar intestinos y sistema nervioso, este signo alcanza su propósito de servicio y perfección."
-  }
+{
+"id": "virgo",
+  "title": "Virgo en el cuerpo según Jyotish",
+  "excerpt": "Virgo rige los intestinos y el sistema nervioso, clave para la digestión y la coordinación mente-cuerpo.",
+  "coverImage": "/images/virgo.jpg",
+  "date": "2025-09-27",
+  "author": "Agente Astrológico",
+  "tags": ["Virgo", "Jyotish", "Cuerpo"],
+  "readingMinutes": 4,
+  "content": "<h2 id='esencia'>Esencia de Virgo en el cuerpo</h2><p>En Jyotish, Virgo se asocia directamente con los <strong>intestinos</strong>, el proceso digestivo y la asimilación de nutrientes. Es el signo que refina, clasifica y separa lo útil de lo que no lo es.</p><h2 id='sistema-nervioso'>Sistema nervioso</h2><p>Además, Virgo está vinculado al <strong>sistema nervioso</strong>, en especial a la conexión entre mente y cuerpo. Su energía influye en la manera en que gestionamos los detalles, la atención y la respuesta al estrés.</p><h2 id='fortalezas'>Fortalezas</h2><ul><li>Gran capacidad para organizar funciones del cuerpo.</li><li>Digestión precisa y eficiente.</li><li>Alta sensibilidad que permite detectar desequilibrios temprano.</li></ul><h2 id='vulnerabilidades'>Vulnerabilidades</h2><ul><li>Problemas digestivos por exceso de preocupación.</li><li>Ansiedad o estrés que afecta la digestión.</li><li>Tendencia a la hipocondría.</li></ul><h2 id='aprovechar'>Cómo aprovechar esta energía</h2><p>El signo invita a cultivar rutinas saludables, alimentación equilibrada y prácticas de relajación para mantener la armonía del sistema digestivo y nervioso.</p>"
 },
 {
   "id": "solenvirgo2025",
