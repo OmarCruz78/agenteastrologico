@@ -1,6 +1,54 @@
 [
 
   {
+    {
+  "id": "virgo-cuerpo",
+  "titulo": "Virgo en Jyotish: intestinos y sistema nervioso",
+  "descripcion": "En la astrología védica, Virgo (Kanyā Rāśi) se relaciona con la digestión, los intestinos y el sistema nervioso, reflejando su naturaleza analítica y discriminativa.",
+  "contenido": {
+    "cuerpo": {
+      "partes": [
+        "Intestinos",
+        "Abdomen inferior",
+        "Bazo",
+        "Sistema digestivo"
+      ],
+      "funciones": [
+        "Asimilación de nutrientes",
+        "Separación de lo útil y lo inútil",
+        "Procesos de purificación corporal"
+      ]
+    },
+    "sistema_nervioso": {
+      "regente": "Mercurio (Budha)",
+      "asociaciones": [
+        "Comunicación interna del cuerpo",
+        "Impulsos nerviosos",
+        "Coordinación motriz",
+        "Ansiedad o hipersensibilidad nerviosa si está afligido"
+      ]
+    },
+    "referencias": [
+      "Bṛhat Parāśara Horā Śāstra: Virgo gobierna el abdomen, desde el ombligo hasta la cintura.",
+      "Sarvārtha Cintāmaṇi: Mercurio rige los nervios, la piel y la coordinación.",
+      "Āyurveda: Virgo se vincula con Pitta-Vata, especialmente en digestión y nervios."
+    ],
+    "equilibrio": {
+      "fortalezas": [
+        "Capacidad de análisis y discriminación",
+        "Cuidado del cuerpo a través de la dieta",
+        "Sensibilidad hacia terapias de sanación"
+      ],
+      "desafios": [
+        "Problemas digestivos crónicos",
+        "Tendencia a la ansiedad o nerviosismo",
+        "Hipocondría o exceso de autocrítica"
+      ]
+    },
+    "reflexion": "Virgo nos recuerda que la verdadera salud surge cuando equilibramos la digestión del cuerpo y la calma de la mente. Al cuidar intestinos y sistema nervioso, este signo alcanza su propósito de servicio y perfección."
+  }
+},
+
   "id": "solenvirgo2025",
   "title": "Sol en Virgo sideral — 17 de septiembre al 17 de octubre",
   "author": "Agente Astrológico",
