@@ -111,6 +111,13 @@ app.get("/blog", (req, res) => {
     <meta name="description" content="Artículos Jyotish y astrología práctica.">
     <link rel="preload" href="/styles-blog.css" as="style">
     <link rel="stylesheet" href="/styles-blog.css">
+    <style>
+
+
+
+
+    </style>
+    
   </head>
   <body>
     <header class="blog-header">
