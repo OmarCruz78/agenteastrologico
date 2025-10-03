@@ -506,3 +506,181 @@ app.get("/ping", (req, res) => res.json({ message: "pong 🏓", status: "ok" }))
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT} - publicDir=${publicDir}`);
 });
+
+const fs = require('fs');
+const path = require('path');
+
+// --- Helpers ---
+// Lee cartas.json desde disk en cada request (ver cambios sin reiniciar)
+function loadCartas() {
+  const file = path.join(__dirname, 'data', 'cartas.json');
+  try {
+    const raw = fs.readFileSync(file, 'utf8');
+    const data = JSON.parse(raw);
+    return Array.isArray(data.charts) ? data.charts : [];
+  } catch (err) {
+    console.error('Error leyendo data/cartas.json:', err.message);
+    return [];
+  }
+}
+
+// Escape básico para evitar XSS en strings simples
+function escapeHtml(str) {
+  if (!str && str !== 0) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Genera la tabla HTML de posiciones (retorna string)
+function renderPositionsTable(positions) {
+  if (!Array.isArray(positions) || !positions.length) {
+    return '<p class="muted">No hay posiciones disponibles.</p>';
+  }
+  const rows = positions.map(p => {
+    const label = escapeHtml(p.label || '');
+    const lon = escapeHtml(p.longitude || '');
+    const deg = typeof p.longitude_deg !== 'undefined' ? escapeHtml(p.longitude_deg) : '';
+    const nak = escapeHtml(p.nakshatra || '');
+    const pada = typeof p.pada !== 'undefined' ? escapeHtml(p.pada) : '';
+    const rasi = escapeHtml(p.rasi || '');
+    const nav = escapeHtml(p.navamsa || '');
+    return `<tr>
+      <td>${label}</td>
+      <td>${lon}</td>
+      <td>${deg}</td>
+      <td>${nak}</td>
+      <td>${pada}</td>
+      <td>${rasi}</td>
+      <td>${nav}</td>
+    </tr>`;
+  }).join('\n');
+
+  return `<table class="positions">
+    <thead>
+      <tr><th>Label</th><th>Longitude</th><th>Deg</th><th>Nakshatra</th><th>Pada</th><th>Rasi</th><th>Navamsa</th></tr>
+    </thead>
+    <tbody>
+      ${rows}
+    </tbody>
+  </table>`;
+}
+
+// Generador completo de la página HTML de una carta
+function renderCartaPage(chart) {
+  const title = escapeHtml(chart.person_name || 'Carta natal');
+  const birth = chart.birth ? escapeHtml((chart.birth.date || '') + ' ' + (chart.birth.time || '') + ' ' + (chart.birth.timezone || '')) : '';
+  const summary = escapeHtml(chart.summary || '');
+  const positionsTable = renderPositionsTable(chart.positions || []);
+
+  // Simple layout; adapta clases/estilos a tu CSS
+  return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${title} — Carta natal</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <style>
+    /* estilos mínimos para que se vea bien */
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:20px;color:#111;background:#f6f7fb}
+    .container{max-width:900px;margin:0 auto;background:#fff;padding:18px;border-radius:10px;box-shadow:0 8px 30px rgba(17,24,39,.06)}
+    .muted{color:#667}
+    .positions{width:100%;border-collapse:collapse;margin-top:12px}
+    .positions th,.positions td{padding:8px 10px;border-bottom:1px solid #eef2f7;text-align:left}
+    a.back{display:inline-block;margin-bottom:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/cartas">← Volver al listado de cartas</a>
+    <h1>${title}</h1>
+    <p class="muted">${birth}</p>
+    <p>${summary}</p>
+
+    <section>
+      <h2>Posiciones</h2>
+      ${positionsTable}
+    </section>
+
+    ${chart.notes && Object.keys(chart.notes||{}).length ? `<section><h3>Notas</h3><pre>${escapeHtml(JSON.stringify(chart.notes, null, 2))}</pre></section>` : ''}
+  </div>
+</body>
+</html>`;
+}
+
+// --- RUTAS ---
+// Opción A: ruta separada para cartas (recomendada)
+app.get('/cartas', (req, res) => {
+  const charts = loadCartas().map(c => ({
+    id: c.id,
+    person_name: c.person_name,
+    summary: c.summary || '',
+    positions_count: (c.positions || []).length,
+    birth: c.birth || {}
+  }));
+
+  // Simple listado HTML
+  const items = charts.map(ch => `<li><a href="/cartas/${encodeURIComponent(String(ch.id))}">${escapeHtml(ch.person_name)}</a> <span class="muted">(${ch.positions_count} posiciones)</span></li>`).join('');
+  const html = `<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Listado de cartas</title>
+<link rel="stylesheet" href="/public/styles.css"></head>
+<body style="font-family:system-ui,Segoe UI,Roboto,Arial;background:#f6f7fb;padding:20px">
+  <main style="max-width:900px;margin:0 auto">
+    <h1>Cartas natales</h1>
+    <ul>${items}</ul>
+    <p><a href="/">Volver al inicio</a></p>
+  </main>
+</body>
+</html>`;
+  res.send(html);
+});
+
+app.get('/cartas/:id', (req, res) => {
+  const id = String(req.params.id || '').toLowerCase();
+  const charts = loadCartas();
+  const chart = charts.find(c => String(c.id || '').toLowerCase() === id);
+
+  if (!chart) {
+    return res.status(404).send(`<!doctype html><html><body><h2>Carta no encontrada</h2><p><a href="/cartas">Volver al listado</a></p></body></html>`);
+  }
+
+  const page = renderCartaPage(chart);
+  res.send(page);
+});
+
+// --- Opción B: integrar en /blog/:id (si quieres que la misma ruta sirva posts o cartas) ---
+// AÑADE esto junto a tu lógica actual en /blog/:id (reemplaza o combina según prefieras)
+app.get('/blog/:id', (req, res, next) => {
+  const id = req.params.id.toLowerCase();
+  const posts = loadPosts(); // tu función existente
+  const post = posts.find(p => String(p.id || '').toLowerCase() === id);
+
+  if (post) {
+    // tu lógica actual para renderizar post (manténla)
+    const safeCover = escapeHtml(post.coverImage || "/images/default-cover.jpg");
+    const safeExcerpt = escapeHtml(post.excerpt || "");
+    const safeTags = (post.tags || []).map(t => escapeHtml(t));
+    // ... genera y envía la página del post
+    // por ejemplo: return res.send(renderPostHtml(post)); (mantén tu implementación)
+    return renderYourExistingPostFlow(req, res, post); // <-- placeholder: conserva tu flujo actual
+  }
+
+  // Si no es un post, probamos entre las cartas
+  const charts = loadCartas();
+  const chart = charts.find(c => String(c.id || '').toLowerCase() === id);
+  if (chart) {
+    // enviar la página de carta (podría integrarse en la plantilla del blog)
+    return res.send(renderCartaPage(chart));
+  }
+
+  // Si no es ni post ni carta, 404
+  return res.status(404).send("<h2>Recurso no encontrado</h2><p><a href='/blog'>Volver al blog</a></p>");
+});
+
+
+
