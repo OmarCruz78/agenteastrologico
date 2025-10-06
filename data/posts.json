@@ -1,7 +1,7 @@
 [
 
   {
-  "id": "virgo-resumen",
+  "id": "virgo.resumen",
   "title": "Virgo (Kanya Rashi) — Resumen Astrológico",
   "author": "Agente Astrológico",
   "date": "2025-10-03",
@@ -14,11 +14,11 @@
 
 
 {
-  "id": "virgo",
+  "id": "Virgo.descripcion",
   "title": "Virgo (Kanya Rashi) — características, salud y nakshatras",
   "author": "Agente Astrológico",
   "date": "2025-09-27",
-  "excerpt": "Resumen de la charla 'Virgo (Kanya Rashi)' — simbolismo, nakshatras, correspondencias corporales y consideraciones de salud desde la perspectiva védica.",
+  "excerpt": "Virgo (Kanya Rashi)' — simbolismo, nakshatras, correspondencias corporales",
   "coverImage": "/images/virgo-heartlight.jpg",
   "tags": ["Virgo", "Jyotish", "Nakshatras", "Salud", "Video"],
   "readingMinutes": 8,
