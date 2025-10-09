@@ -682,5 +682,3 @@ app.get('/blog/:id', (req, res, next) => {
   return res.status(404).send("<h2>Recurso no encontrado</h2><p><a href='/blog'>Volver al blog</a></p>");
 });
 
-
-
