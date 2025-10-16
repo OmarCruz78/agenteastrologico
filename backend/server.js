@@ -39,6 +39,19 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
+
+// Decodifica entidades HTML (&lt; &gt; &amp; etc.) -> useful if your JSON has escaped HTML
+function decodeHtmlEntities(str = "") {
+  return String(str)
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+
+
 // --- Helper: intenta cargar HTML de un archivo asociado al post ---
 function slugify(str = '') {
   return String(str || '')
