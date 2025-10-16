@@ -312,3 +312,94 @@ article h1{margin:0 0 12px;font-size:clamp(1.5rem,2.6vw,2.2rem)}
 a{color:inherit}
 button{font-family:inherit}
 
+   /* Base cósmico */
+    :root{
+      --bg1: #03041a;
+      --bg2: #071026;
+      --card-bg: rgba(8,8,20,0.45);
+      --accent: #9b6bff;
+      --gold: #ffd86b;
+      --muted: #bfc6d8;
+    }
+    html,body{height:100%;margin:0;font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(20,12,50,0.55), transparent 10%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color: var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* canvas starfield behind content */
+    #starfield {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .container{
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 28px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(8,8,20,0.40), rgba(6,6,18,0.30));
+      box-shadow: 0 10px 40px rgba(5,3,20,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px) saturate(1.1);
+    }
+
+    header.meta {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 14px;
+    }
+
+    .back { color:var(--muted); text-decoration:none; font-weight:600; }
+    .back:hover { color: var(--gold); }
+
+    h1{
+      color: var(--gold);
+      font-size: 2rem;
+      margin: 6px 0 10px 0;
+      text-align:left;
+      text-shadow: 0 6px 30px rgba(155,107,255,0.06);
+    }
+
+    .post-meta { color: #9fb0d6; font-size:0.95rem; }
+
+    .post-cover {
+      width:100%;
+      height:360px;
+      border-radius:12px;
+      background-size:cover;
+      background-position:center;
+      margin: 18px 0;
+      box-shadow: 0 8px 30px rgba(30,10,80,0.45);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .post-excerpt { color:#c9d6f4; margin-bottom: 18px; font-size:1.05rem; }
+
+    article.post-content{
+      color:#e6eefc;
+      line-height:1.85;
+      font-size:1.03rem;
+    }
+    article.post-content h2{ color: #ffd86b; margin-top:1.2rem; }
+    article.post-content p{ margin: .7rem 0; }
+    article.post-content a{ color: var(--accent); }
+    article.post-content img{ max-width:100%; border-radius:10px; display:block; margin:1rem auto; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+
+    .tags { text-align:center; margin-top:20px; color:var(--gold); font-weight:600; }
+
+    /* small screens */
+    @media(min-width:980px){
+      .container { margin: 64px auto; padding: 36px; }
+    }
