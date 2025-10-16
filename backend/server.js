@@ -195,7 +195,7 @@ function renderPostHtml(post) {
     <title>${title}</title>
 
     <!-- Hoja de estilos principal del blog (debe existir en public/styles-blog.css) -->
-    <link rel="stylesheet" href="/styles2.css">
+    <link rel="stylesheet" href="/styles-blog.css">
 
     <!-- Fallback CSS mínimo si falta la hoja externa -->
     <!--style>
