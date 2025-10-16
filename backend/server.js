@@ -6,6 +6,17 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
+console.log("DEBUG: NODE_ENV=", process.env.NODE_ENV);
+console.log("DEBUG: cwd=", process.cwd());
+console.log("DEBUG: __dirname=", __dirname);
+console.log("DEBUG: verificar candidatos de posts.json:");
+console.log(path.join(__dirname, "data", "posts.json"));
+console.log(path.join(__dirname, "..", "data", "posts.json"));
+console.log(path.join(__dirname, "..", "..", "data", "posts.json"));
+
+
 // public dentro de backend/
 const publicDir = path.join(__dirname, "public");
 console.log("Servir estáticos desde:", publicDir);
