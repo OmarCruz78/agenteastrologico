@@ -230,6 +230,20 @@ function renderPostHtml(post) {
 
 
 // --- RUTAS ---
+
+// Galaxy index
+
+app.get('/galaxy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'galaxy', 'galaxy.html'));
+});
+
+// (Opcional) redirigir /galaxy/ (con slash) también
+app.get('/galaxy/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'galaxy', 'galaxy.html'));
+});
+
+
+
 // Blog index
 app.get("/blog", (req, res) => {
   const posts = loadPosts();
