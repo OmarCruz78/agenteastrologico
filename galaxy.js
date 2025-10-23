@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galaxy</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: #000; }
+    canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  // ---------- Parámetros (se mantuvieron los pedidos) ----------
+  const NUM_PARTICLES = 60000;   // ajustable si quieres más/menos
+  const RADIUS = 105;            // = 105 (lo pediste)
+  
+  const SPIRAL_ARMS = 4;
+  const ARM_SPREAD = 0.6;
+
+
+// Detecta si es móvil
+  const isMobile = window.innerWidth < 768;
+
+  // Partículas más grandes si es móvil
+  const PARTICLE_SIZE = isMobile ? 0.02 : 0.01;
+
+const COLOR_SET = [
+  new THREE.Color(0x7f00ff), // corona - violeta
+  new THREE.Color(0x9999ff), // tercer ojo - azul índigo
+  new THREE.Color(0xffffff), // garganta - celeste
+  new THREE.Color(0x9fff9f), // corazón - verde
+  new THREE.Color(0xffff8f), // plexo solar - amarillo
+  new THREE.Color(0xff7f7f), // sacro - naranja
+  new THREE.Color(0xff9f9f)  // raíz - rojo
+];
+
+// función utilitaria: crea un texture circular en canvas
+function makeCircleTexture(size = 128, color = '#ffffff') {
+  const cvs = document.createElement('canvas');
+  cvs.width = cvs.height = size;
+  const cx = cvs.getContext('2d');
+
+  cx.clearRect(0, 0, size, size);
+  cx.beginPath();
+  cx.arc(size/2, size/2, size*0.45, 0, Math.PI*2);
+  cx.closePath();
+
+  cx.fillStyle = color;
+  cx.fill();
+
+  // degradado suave (opcional)
+  cx.globalCompositeOperation = 'destination-out';
+  const g = cx.createRadialGradient(size/2, size/2, size*0.3, size/2, size/2, size*0.5);
+  g.addColorStop(0, 'rgba(0,0,0,0)');
+  g.addColorStop(1, 'rgba(0,0,0,0.25)');
+  cx.fillStyle = g;
+  cx.fill();
+
+  return new THREE.CanvasTexture(cvs);
+}
+
+
+
+
+
+  // ---------- Scene / Camera / Renderer ----------
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 2000);
+
+camera.position.z = isMobile ? 8 : 16;
+
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Cámara: posición z = 16 tal como pediste
+  camera.position.z = 16;
+
+  // ---------- Geometry (Float32Array) ----------
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(NUM_PARTICLES * 3);
+  const colors = new Float32Array(NUM_PARTICLES * 3);
+  const initialY = new Float32Array(NUM_PARTICLES);
+
+  for (let i = 0; i < NUM_PARTICLES; i++) {
+    const arm = i % SPIRAL_ARMS;
+    const baseAngle = (i / NUM_PARTICLES) * Math.PI * 2 * SPIRAL_ARMS;
+    const angle = baseAngle + (Math.random() - 0.5) * 0.6;
+    const distance = Math.pow(Math.random(), 1.2) * RADIUS;
+    const spread = (Math.random() - 0.5) * ARM_SPREAD;
+
+    const x = Math.cos(angle + arm * (Math.PI * 2 / SPIRAL_ARMS)) * distance + spread;
+    const y = (Math.random() - 0.5) * 22; // más alto para variación vertical
+    const z = Math.sin(angle + arm * (Math.PI * 2 / SPIRAL_ARMS)) * distance + spread;
+
+    positions[i*3 + 0] = x;
+    positions[i*3 + 1] = y;
+    positions[i*3 + 2] = z;
+
+    initialY[i] = y;
+
+    const colorIndex = Math.abs(Math.floor(((angle % (Math.PI * 2)) / (Math.PI * 2)) * COLOR_SET.length)) % COLOR_SET.length;
+    const baseColor = COLOR_SET[colorIndex];
+    const blended = baseColor.clone().lerp(new THREE.Color(0x4e0bd4), distance / RADIUS);
+
+    colors[i*3 + 0] = blended.r;
+    colors[i*3 + 1] = blended.g;
+    colors[i*3 + 2] = blended.b;
+  }
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+// luego, al crear el material de puntos (reemplaza tu PointsMaterial)
+const circleTex = makeCircleTexture(128, '#ffffff');
+const material = new THREE.PointsMaterial({
+  size: PARTICLE_SIZE,
+  vertexColors: true,
+  transparent: true,
+  alphaTest: 0.01, // opcional: recorta píxeles casi transparentes
+  map: circleTex,
+  depthWrite: false,
+  sizeAttenuation: true
+});
+
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
+
+  // Luz (opcional, para sprites y ambiente)
+  const sunlight = new THREE.DirectionalLight(0xffffff, 1.0);
+  sunlight.position.set(10, 10, 7);
+  scene.add(sunlight);
+
+  // ---------- Interacción ----------
+  let isPointerDown = false;
+  let lastX = 0, lastY = 0;
+  let targetRotX = 0, targetRotY = 0;
+  let currentRotX = 0, currentRotY = 0;
+  const LERP = 0.06;
+
+  document.addEventListener('mousedown', e => {
+    isPointerDown = true;
+    lastX = e.clientX; lastY = e.clientY;
+  });
+  document.addEventListener('mouseup', () => isPointerDown = false);
+  document.addEventListener('mousemove', e => {
+    if (!isPointerDown) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    targetRotY += dx * 0.004;
+    targetRotX += dy * 0.004;
+    lastX = e.clientX; lastY = e.clientY;
+  });
+
+  // Touch: 1 dedo rota, 2 dedos pinch zoom
+  let initialPinchDist = null;
+  function getTouchDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      isPointerDown = true;
+      lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+      initialPinchDist = null;
+    } else if (e.touches.length === 2) {
+      isPointerDown = false;
+      initialPinchDist = getTouchDistance(e.touches);
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (e.touches.length === 1 && isPointerDown) {
+      const dx = e.touches[0].clientX - lastX;
+      const dy = e.touches[0].clientY - lastY;
+      targetRotY += dx * 0.004;
+      targetRotX += dy * 0.004;
+      lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+    } else if (e.touches.length === 2 && initialPinchDist !== null) {
+      const cur = getTouchDistance(e.touches);
+      const delta = initialPinchDist - cur;
+      camera.position.z += delta * 0.08;
+      camera.position.z = Math.max(1, Math.min(25, camera.position.z)); // limites acorde a tu request
+      initialPinchDist = cur;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (!event.touches || event.touches.length === 0) {
+      isPointerDown = false;
+      initialPinchDist = null;
+    }
+  });
+
+  // Rueda para zoom (mantener limits coherentes: min 1, max 25)
+  window.addEventListener('wheel', e => {
+    e.preventDefault();
+    camera.position.z += e.deltaY * 0.01;
+    camera.position.z = Math.max(1, Math.min(25, camera.position.z));
+  }, { passive: false });
+
+  // ---------- Sprite (imagen central) ----------
+  let sprite = null;
+  const loader = new THREE.TextureLoader();
+  loader.setCrossOrigin('anonymous');
+
+  loader.load(
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7IFevOeApyNCDFJ9cgp5PMm1eO2rjC34_QPFG-9O5Qw&s=10',
+    texture => {
+      const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
+      sprite = new THREE.Sprite(mat);
+      sprite.position.set(0, 0, 0);
+      // escala inicial; será actualizada cada frame tomando en cuenta camera.z (min 1, max 25)
+      sprite.scale.set(0.5, 0.5, 0.5);
+      scene.add(sprite);
+    },
+    undefined,
+    err => {
+      console.warn('No se pudo cargar la textura del sprite:', err);
+    }
+  );
+
+  // ---------- Animación ----------
+  let time = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Rotación suave
+    currentRotX = THREE.MathUtils.lerp(currentRotX, targetRotX, LERP);
+    currentRotY = THREE.MathUtils.lerp(currentRotY, targetRotY, LERP);
+    particles.rotation.x = currentRotX;
+    particles.rotation.y = currentRotY;
+
+    // Wobble vertical
+    const pos = geometry.attributes.position.array;
+    time += 0.0075;
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+      pos[i*3 + 1] = initialY[i] + Math.sin(time + i * 0.1) * 0.12;
+    }
+    geometry.attributes.position.needsUpdate = true;
+
+    // Sprite escala con la distancia de la cámara (manteniendo min/max razonables)
+  // Sprite se agranda al acercar la cámara (escala inversa a la distancia)
+if (sprite) {
+  const minZ = 1, maxZ = 25; // límites de la cámara
+  const minScale = 0.5;      // tamaño grande cuando estás muy cerca
+  const maxScale = 0.05;     // tamaño pequeño cuando estás lejos
+
+  // Mapeo inverso: al acercarse (z baja), el tamaño aumenta
+  const s = THREE.MathUtils.mapLinear(camera.position.z, minZ, maxZ, minScale, maxScale);
+  const clamped = THREE.MathUtils.clamp(s, maxScale, minScale);
+  sprite.scale.set(clamped, clamped, clamped);
+
+  // Mantener el sprite siempre mirando a la cámara
+  sprite.quaternion.copy(camera.quaternion);
+}
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Resize
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  // ---------- Overlay UI (donaciones) ----------
+  window.addEventListener('load', () => {
+    const style = document.createElement('style');
+    style.textContent = `
+      #alertOverlay { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; background: rgba(0,0,0,0.56); z-index: 9999; }
+      #alertBox { background: #fff; color: #222; padding: 18px 24px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); text-align: center; min-width: 240px; max-width: 86%; }
+      #alertBox h2 { margin: 0 0 8px 0; font-size: 17px; }
+      #alertMessage { margin: 0; font-size: 14px; line-height: 1.4; }
+      #alertButton { margin-top: 12px; background: #1f8ef1; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
+    `;
+    document.head.appendChild(style);
+
+    const overlay = document.createElement('div'); overlay.id = 'alertOverlay';
+    const box = document.createElement('div'); box.id = 'alertBox';
+    const title = document.createElement('h2'); title.textContent = 'Explora las estrellas, y descubre el universo que habita en ti.';
+    const message = document.createElement('p'); message.id = 'alertMessage';
+    message.innerHTML = 'Visita mi portafolio en  <a href="https://darkamlc.github.io/donacion/" target="_blank" rel="noopener noreferrer">criptomonedas</a>.';
+    const btn = document.createElement('button'); btn.id = 'alertButton'; btn.textContent = 'OK';
+    btn.onclick = () => overlay.style.display = 'none';
+
+    box.appendChild(title); box.appendChild(message); box.appendChild(btn);
+    overlay.appendChild(box); document.body.appendChild(overlay);
+
+    // mostrar overlay una vez al inicio (opcional)
+    setTimeout(() => overlay.style.display = 'flex', 700);
+  });
+
+  </script>
+</body>
+</html>
