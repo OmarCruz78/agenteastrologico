@@ -1,36 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="script.js"> </script>
-<title>Agente Astrológico IA</title>
-<style>
-</style>
+  <title>Mi Portafolio</title>
 </head>
-<body onload="loadImage()">
-<header><h1>Agente Astrológico IA</h1></header>
-<main>
-<label for="fecha">Fecha de nacimiento:</label>
-<input type="date" id="fecha">
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">Omar Cruz  </h1>
+     <!-- Botón menú hamburguesa -->
+    <button class="hamburger" id="hamburger">☰</button>  
+     
+       <ul class="nav-links" id="nav-links">
+     
+        <li><a href="#about">Sobre mí</a></li>
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
 
-<label for="hora">Hora de nacimiento:</label>
-<input type="time" id="hora">
+    </nav>
+  </header>
 
-<label for="lugar">Lugar de nacimiento:</label>
-<input type="text" id="lugar" placeholder="Ciudad, País">
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <!-- h2>Hola, soy <span>Omar</span></h2 -->
+    <h2>Diseñador Web </h2>
+   
+    <p>HTML • CSS • JavaScript</p>
+    <a href="#projects" class="btn">Ver Proyectos</a>
+  </section>
 
-<button id="generar">Generar interpretación</button>
+  <!-- Sobre mí -->
+  <section id="about" class="about">
+    <h2>Sobre mí</h2>
+    <p>Soy diseñador web apasionado por crear interfaces modernas y funcionales. Manejo HTML, CSS, JavaScript y desarrollo sitios responsivos y dinámicos.</p>
+    <div class="skills">
+      <div class="skill">✔ HTML5</div>
+      <div class="skill">✔ CSS3</div>
+      <div class="skill">✔ JavaScript</div>
+    </div>
+  </section>
 
-<div id="resultado">Aquí aparecerá la interpretación...</div>
-</main>
-<script>
-function loadImage() {
-  alert("Image is loaded");}
-</script>
+  <!-- Proyectos -->
 
-    <script type="module" src="script.js"> </script>
-</body>
-</html>
+    <section id="projects" class="projects">
+    <h2>Proyectos</h2>
 
+<div class="projects-grid">
+  <div class="project-card">
+ 
+ 
+  <img src="https://i.ibb.co/RTMkSLMJ/Screenshot-2025-08-20-15-36-36-875-com-brave-browser-edit.jpg" alt="Screenshot-2025-08-20-15-36-36-875-com-brave-browser-edit" border="0">
+   
+    <div class="content">
+      <h3>Galeria fotografica</h3>
+      <p>Galería de fotos con lightbox en JS.</p>
+      <div class="links">
+        <a href="https://github.com/OmarCruz78/photogallery" target="_blank">GitHub</a>
+        <a href="https://OmarCruz78.github.io/photogallery/" target="_blank">Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <img src="https://i.ibb.co/mC9DK5Vd/Screenshot-2025-08-27-10-12-22-824-com-facebook-orca.jpg" alt="Screenshot-2025-08-27-10-12-22-824-com-facebook-orca" border="0">
+    <div class="content">
+      <h3>Calculadora astrologica</h3>
+      <p>Calculadora astrologica hecho en JavaScript.</p>
+      <div class="links">
+        <a href="https://omarcruz78.github.io/calculadora-astrologica/" target="_blank">GitHub</a>
+        <a href="https://omarcruz78.github.io/calculadora-astrologica/" target="_blank">Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
+<img src="https://i.ibb.co/tMb1L11F/Screenshot-2025-08-19-03-06-17-540-com-brave-browser-edit.jpg" alt="Screenshot-2025-08-19-03-06-17-540-com-brave-browser-edit" border="0">    
+    <div class="content">
+      <h3>Portafolio Web</h3>
+      <p>Mi portafolio personal con HTML, CSS y JS.</p>
+      <div class="links">
+        <a href="https://github.com/OmarCruz78/webportfolio" target="_blank">GitHub</a>
+        <a href="https://OmarCruz78.github.io/webportfolio/" target="_blank">Demo</a>
+      </div>
+    </div>
+  </div>
+
+ 
+  </div>
+
+
+</div>
+
+    </section>
+
+  <!-- Contacto -->
+  <section id="contact" class="contact">
+    <h2>Contacto</h2>
+    <form id="contactForm" onsubmit="sendToWhatsApp(event)">
+      <input type="text" placeholder="Tu nombre" required id="name">
+      <input type="email" placeholder="Tu email" required id="email">
+      <textarea placeholder="Tu mensaje" required id="message"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>©2025 Omar Cruz </footer>
+
+  <!-- ===== Script ===== -->
+
+
+<script src="script.js">
+
+ </script>
