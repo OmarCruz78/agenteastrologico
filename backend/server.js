@@ -232,15 +232,15 @@ function renderPostHtml(post) {
 // --- RUTAS ---
 
 // Galaxy index
-
 app.get('/galaxy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'galaxy', 'galaxy.html'));
+  res.sendFile(path.join(__dirname, 'public', 'galaxy.html'));
 });
 
 // (Opcional) redirigir /galaxy/ (con slash) también
 app.get('/galaxy/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'galaxy', 'galaxy.html'));
+  res.sendFile(path.join(__dirname, 'public', 'galaxy.html'));
 });
+
 
 
 
