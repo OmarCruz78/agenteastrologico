@@ -1,4 +1,19 @@
 [
+
+
+
+  {
+  "id": "libra-sideral",
+  "title": "Tula Rashi ♎ — El Equilibrio del Dharma",
+  "author": "Agente Astrológico",
+  "date": "2025-10-20",
+  "excerpt": "Libra (Tula Rashi) representa el arte del equilibrio, la justicia y la relación consciente con el otro. En la astrología védica, este signo marca el punto donde el alma aprende a armonizar deseo y deber, mente y corazón.",
+  "coverImage": "https://example.com/images/libra-sideral.jpg",
+  "tags": ["Zodiaco Sideral", "Tula", "Libra", "Venus", "Astrología Védica"],
+  "readingMinutes": 6,
+  "content": "<h2 id=\"intro\">Introducción</h2><p>Tula Rashi, el séptimo signo del zodiaco sideral, se extiende aproximadamente desde el 23 de octubre al 15 de noviembre. Representa el punto de equilibrio entre el yo y los demás, simbolizando la balanza del dharma, la armonía y la ley universal. Aquí, la conciencia humana busca justicia, belleza y cooperación.</p><h2 id=\"naturaleza\">🌸 Naturaleza y Elemento</h2><p>Tula es un signo <strong>de aire</strong> y <strong>masculino</strong>, regido por <strong>Shukra (Venus)</strong>. Su elemento otorga una mente analítica, sociable y reflexiva, mientras que Venus impregna al nativo de amor por la estética, la diplomacia y el equilibrio emocional. Es el punto donde la energía pasa del deseo individual (Kanya/Virgo) al deseo compartido.</p>"
+},
+
 {
   "id": "sol-en-hasta",
   "title": "El Sol en Hasta Nakshatra — La Mano Creadora y el Poder de Moldear la Vida",
