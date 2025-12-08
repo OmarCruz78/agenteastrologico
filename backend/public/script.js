@@ -1,66 +1,48 @@
-import OpenAI from 'https://cdn.jsdelivr.net/npm/openai@latest/dist/openai.min.js';
-import jyotish from 'https://cdn.jsdelivr.net/npm/jyotish-calculations@latest/dist/jyotish.min.js';
+const header = document.querySelector("header"); 
 
-// Inicializar OpenAI
-const openai = new OpenAI({
-  apiKey: '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', // Mejor usar backend para seguridad
-});
+  window.addEventListener("scroll", () => {
+    const maxScroll = 300;
+    let opacity = Math.min(window.scrollY / maxScroll, 1); 
+    const rgb = getComputedStyle(document.documentElement)
+                  .getPropertyValue('--color-primario-rgb')
+                  .trim();
+    header.style.backgroundColor = `rgba(${rgb}, ${opacity})`;
+  });
 
-// Función para generar la interpretación astrológica
-async function generarInterpretacion(fechaHoraISO, lugar) {
-  try {
-    const fecha = new Date(fechaHoraISO);
+  const hamburger = document.getElementById("hamburger"); 
+  const navLinks = document.getElementById("nav-links"); 
+  hamburger.addEventListener("click", () => { 
+    navLinks.classList.toggle("show"); 
+  }); 
 
-    // Calcular posiciones planetarias
-    const posiciones = jyotish.grahas.calculatePositions(fecha, lugar);
+  const hero = document.getElementById("hero");
+  const imagenes = [
+    "https://i.ibb.co/Kc1q9Xpn/IMG-20250813-175111.jpg",
+    "https://i.ibb.co/jv42w7Ns/veronica.jpg",
+    "https://i.ibb.co/dw0LNktw/IMG-20250701-144825-15.jpg"
+      
+  ]; 
+  let index = 0; 
 
-    // Obtener Nakshatra de la Luna
-    const nakshatraLuna = jyotish.nakshatras.getNakshatraForPosition(posiciones.moon.longitude);
+  function cambiarFondo() {
+    hero.style.backgroundImage = `url(${imagenes[index]})`; 
+    index = (index + 1) % imagenes.length; 
+  } 
 
-    // Crear prompt para GPT
-    const prompt = `
-Eres un astrólogo experto en Jyotish.
-Interpreta la siguiente carta natal:
-Fecha y hora: ${fecha.toLocaleString()}
-Lugar: ${lugar}
-Posiciones planetarias: ${JSON.stringify(posiciones, null, 2)}
-Nakshatra de la Luna: ${nakshatraLuna}
+  // inicial
+  cambiarFondo();
+  // cambia cada 5s
+  setInterval(cambiarFondo, 5000);
 
-Proporciona un análisis detallado sobre personalidad, emociones, liderazgo, talentos y posibles desafíos.
-Hazlo claro y amigable.
-`;
+  function sendToWhatsApp(event) {
+    event.preventDefault(); // evita que recargue la página
+    
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
-    // Llamada a OpenAI
-    const respuesta = await openai.chat.completions.create({
-      model: 'gpt-5-mini',
-      messages: [{ role: 'user', content: prompt }],
-    });
+    const phoneNumber = "51913445021"; // 👉 tu número con código de país
+    const url = `https://wa.me/${phoneNumber}?text=Hola, soy ${name}. Mi correo es ${email}. Mensaje: ${message}`;
 
-    return respuesta.choices[0].message.content;
-  } catch (error) {
-    console.error(error);
-    return 'Error al generar la interpretación. Revisa la consola.';
+    window.open(url, "_blank"); // abre WhatsApp en nueva pestaña
   }
-}
-
-// Evento del botón
-document.getElementById('generar').addEventListener('click', async () => {
-  const fecha = document.getElementById('fecha').value;
-  const hora = document.getElementById('hora').value;
-  const lugar = document.getElementById('lugar').value;
-  console.log("Hello, world!");
-
-  if (!fecha || !hora || !lugar) {
-    alert('Por favor, completa todos los campos.');
-    return;
-  }
-
-  // Combinar fecha y hora en formato ISO
-  const fechaHoraISO = `${fecha}T${hora}:00`;
-
-  const resultadoDiv = document.getElementById('resultado');
-  resultadoDiv.textContent = 'Generando interpretación...';
-
-  const interpretacion = await generarInterpretacion(fechaHoraISO, lugar);
-  resultadoDiv.textContent = interpretacion;
-});
